@@ -7,7 +7,7 @@ def app():
     st.markdown(""" 
     --- 
     ### What is Two-Pic Modeling?  
-    **Two-Pic Modeling** is an interactive game inspired by **topic modeling**. In topic modeling, algorithms analyze documents and group them by identifying hidden themes. In this game, documents were replaced with **pictures**.  
+    **Two-Pic Modeling** is an interactive game inspired by **topic modeling**. In topic modeling, algorithms analyze documents and group them by identifying hidden themes. In this game, documents are replaced with **pictures**.  
     Just like words in a document, these images represent abstract ideas, and your goal is to group them into the correct **topic clusters**.
 
     **Instructions:**  

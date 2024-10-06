@@ -1,102 +1,62 @@
 import streamlit as st
 
 def app():
-    # Intro description
-    st.title("🎮 **Welcome to Two-Pic Modeling!** 🎮")
+    st.title("📝 **Topic Modeling Quizzes**")
 
-    st.markdown(""" 
-    --- 
-    ### What is Two-Pic Modeling?  
-    **Two-Pic Modeling** is an interactive game inspired by **topic modeling**. In topic modeling, algorithms analyze documents and group them by identifying hidden themes. In this game, documents were replaced with **pictures**.  
-    Just like words in a document, these images represent abstract ideas, and your goal is to group them into the correct **topic clusters**.
+    # Quiz 1: LDA Full Form
+    st.markdown("### 1️⃣ What does LDA stand for?")
+    answer_lda = st.radio("Choose an answer:", ["", "Latent Data Algorithm", "Latent Dirichlet Allocation", "Linear Document Analysis"], index=0)
+    
+    if answer_lda == "":
+        st.warning("Please select an answer.")
+    elif answer_lda == "Latent Dirichlet Allocation":
+        st.success("✅ Correct! LDA stands for Latent Dirichlet Allocation.")
+    else:
+        st.error("❌ Incorrect. LDA stands for Latent Dirichlet Allocation.")
 
-    **Instructions:**  
-    - You'll be presented with **two images** side-by-side in each round.
-    - Choose the correct **topic cluster** for the images.
-    - Each cluster represents a different theme, just like in topic modeling!
+    # Quiz 2: Purpose of LDA
+    st.markdown("### 2️⃣ What does LDA do?")
+    answer_lda_purpose = st.radio("Choose an answer:", ["", "Manually assigns topics to documents", "Groups documents based on word patterns", "Summarizes document length"], index=0)
+    
+    if answer_lda_purpose == "":
+        st.warning("Please select an answer.")
+    elif answer_lda_purpose == "Groups documents based on word patterns":
+        st.success("✅ Correct! LDA groups documents based on word patterns.")
+    else:
+        st.error("❌ Incorrect. LDA automatically groups documents based on word patterns.")
 
-    Let’s begin and see how well you can classify these images! 🚀 
-    --- 
-    """)
+    # Quiz 3: Full Form of TF-IDF
+    st.markdown("### 3️⃣ What does TF-IDF stand for?")
+    answer_tfidf = st.radio("Choose an answer:", ["", "Term Frequency-Inverse Document Frequency", "Text Frequency-Information Document Factor", "Total Frequency-Inverse Document Factor"], index=0)
+    
+    if answer_tfidf == "":
+        st.warning("Please select an answer.")
+    elif answer_tfidf == "Term Frequency-Inverse Document Frequency":
+        st.success("✅ Correct! TF-IDF stands for Term Frequency-Inverse Document Frequency.")
+    else:
+        st.error("❌ Incorrect. TF-IDF stands for Term Frequency-Inverse Document Frequency.")
 
-    # Define total number of rounds
-    total_rounds = 5  
+    # Quiz 4: Function of TF-IDF
+    st.markdown("### 4️⃣ What is the purpose of TF-IDF?")
+    answer_tfidf_purpose = st.radio("Choose an answer:", ["", "Count the total words in a document", "Measure word importance based on its frequency", "Identify all nouns in a document"], index=0)
+    
+    if answer_tfidf_purpose == "":
+        st.warning("Please select an answer.")
+    elif answer_tfidf_purpose == "Measure word importance based on its frequency":
+        st.success("✅ Correct! TF-IDF measures the importance of a word based on how often it appears and how rare it is across documents.")
+    else:
+        st.error("❌ Incorrect. TF-IDF measures word importance based on frequency and rarity.")
 
-    # Define the rounds with specific images and clusters
-    rounds_data = [
-        {
-            "images": ["data/1img1.png", "data/1img2.png"],
-            "clusters": [
-                "Cluster 1: Park, Grass, Families, Outdoors",
-                "Cluster 2: Mountains, Snowboarding, Hiking, Scenery",
-                "Cluster 3: City, Urban, Buildings, Nightlife",
-                "Cluster 4: Beach, Ocean, Relaxation, Vacation"
-            ],
-            "correct": "Cluster 1: Park, Grass, Families, Outdoors"
-        },
-        {
-            "images": ["data/2img1.png", "data/2img2.png"],
-            "clusters": [
-                "Cluster 1: Music, Instruments, Melody, Concerts",
-                "Cluster 2: Movies, Films, Actors, Theater",
-                "Cluster 3: Video Games, Players, Virtual World, Strategy",
-                "Cluster 4: Books, Reading, Stories, Literature"
-            ],
-            "correct": "Cluster 3: Video Games, Players, Virtual World, Strategy"
-        },
-        {
-            "images": ["data/3img1.png", "data/3img2.png"],
-            "clusters": [
-                "Cluster 1: Science, Technology, Advancement, Innovation",  # Changed to correct cluster
-                "Cluster 2: Environment, Sustainability, Ecology, Nature",
-                "Cluster 3: Religion, Spirituality, Rituals, Beliefs",
-                "Cluster 4: Urban, Infrastructure, Development, Modernization"
-            ],
-            "correct": "Cluster 1: Science, Technology, Advancement, Innovation"  # This is now the correct option
-        },
-        {
-            "images": ["data/4img1.png", "data/4img2.png"],
-            "clusters": [
-                "Cluster 1: Commerce, Trade, Market, Exchange",
-                "Cluster 2: Festivals, Celebration, Tradition, Community",
-                "Cluster 3: City, Urban, Buildings, Nightlife",
-                "Cluster 4: Art, Creativity, Exhibitions, Design"
-            ],
-            "correct": "Cluster 1: Commerce, Trade, Market, Exchange"
-        },
-        {
-            "images": ["data/5img1.png", "data/5img2.png"],
-            "clusters": [
-                "Cluster 1: Science, Exploration, Phenomena",
-                "Cluster 2: Quantum Physics, Theory, Paradoxes",
-                "Cluster 3: Singularity, Reality, Dimensions, Cyberpunk",
-                "Cluster 4: Sci-Fi, Dystopia, Alternate Realities"
-            ],
-            "correct": "Cluster 4: Sci-Fi, Dystopia, Alternate Realities"
-        }
-    ]
-
-    # Start the rounds of the game
-    for round_num in range(total_rounds):
-        st.markdown(f"### Round {round_num + 1}")
-
-        # Display images for the current round
-        st.image(rounds_data[round_num]["images"], width=300, caption=["Image 1", "Image 2"])
-
-        # Radio button for cluster selection with a blank default option
-        cluster_option = st.radio("Which cluster do these images belong to?", 
-                                   ["",  # Blank option
-                                    *rounds_data[round_num]["clusters"]], 
-                                   key=f"radio_{round_num}")
-
-        # Button for submitting the answer
-        if st.button(f"Submit Round {round_num + 1}"):
-            if cluster_option == "":
-                st.warning("Please select an answer.")  # Prompt for selection
-            elif cluster_option == rounds_data[round_num]["correct"]:
-                st.success("✅ Correct!")
-            else:
-                st.error("❌ Try again.")
+    # Quiz 5: Use Case of LDA
+    st.markdown("### 5️⃣ In which scenario would you use LDA?")
+    answer_lda_use = st.radio("Choose an answer:", ["", "To group similar news articles into topics", "To measure the frequency of common words like 'the'", "To manually tag documents with labels"], index=0)
+    
+    if answer_lda_use == "":
+        st.warning("Please select an answer.")
+    elif answer_lda_use == "To group similar news articles into topics":
+        st.success("✅ Correct! LDA is great for grouping large collections of documents, like news articles, into topics based on word patterns.")
+    else:
+        st.error("❌ Incorrect. LDA is used for automatically grouping documents into topics based on patterns.")
 
 if __name__ == '__main__':
     app()
